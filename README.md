@@ -30,7 +30,7 @@ Designed specifically to serve as a high-reliability starter template for **AI A
 ## 🏛 Architecture Overview
 
 - **UI Framework:** Jetpack Compose (Material 3) with dynamic color theming, edge-to-edge system insets, and dark/light modes.
-- **Language & Runtime:** Kotlin 2.x, Java 17, Android SDK 36 (target), minSdk 24.
+- **Language & Runtime:** Kotlin 2.x, Java 21, Android SDK 36 (target), minSdk 24.
 - **State Management:** MVVM / MVI architecture using `ViewModel`, Kotlin Coroutines `StateFlow`, and `collectAsStateWithLifecycle`.
 - **Testing Engine:**
   - **JVM Unit Tests:** JUnit 4 & AndroidX Test.
