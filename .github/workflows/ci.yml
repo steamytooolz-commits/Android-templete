@@ -47,16 +47,36 @@ jobs:
           fi
 
       - name: Make Gradlew Executable
-        run: chmod +x ./gradlew || true
+        run: |
+          if [ ! -f ./gradlew ]; then
+            echo "gradlew not found. Generating wrapper with gradle..."
+            gradle wrapper || true
+          fi
+          chmod +x ./gradlew || true
 
       - name: Run Android Lint
-        run: ./gradlew lintDebug --stacktrace
+        run: |
+          if [ -f ./gradlew ]; then
+            ./gradlew lintDebug --stacktrace
+          else
+            gradle lintDebug --stacktrace
+          fi
 
       - name: Run Unit & Robolectric Tests
-        run: ./gradlew testDebugUnitTest --stacktrace
+        run: |
+          if [ -f ./gradlew ]; then
+            ./gradlew testDebugUnitTest --stacktrace
+          else
+            gradle testDebugUnitTest --stacktrace
+          fi
 
       - name: Verify Roborazzi Screenshot Tests
-        run: ./gradlew verifyRoborazziDebug --stacktrace
+        run: |
+          if [ -f ./gradlew ]; then
+            ./gradlew verifyRoborazziDebug --stacktrace
+          else
+            gradle verifyRoborazziDebug --stacktrace
+          fi
         continue-on-error: false
 
       - name: Upload Test Results
@@ -104,10 +124,20 @@ jobs:
           fi
 
       - name: Make Gradlew Executable
-        run: chmod +x ./gradlew || true
+        run: |
+          if [ ! -f ./gradlew ]; then
+            echo "gradlew not found. Generating wrapper with gradle..."
+            gradle wrapper || true
+          fi
+          chmod +x ./gradlew || true
 
       - name: Assemble Debug APK
-        run: ./gradlew assembleDebug --stacktrace
+        run: |
+          if [ -f ./gradlew ]; then
+            ./gradlew assembleDebug --stacktrace
+          else
+            gradle assembleDebug --stacktrace
+          fi
 
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4

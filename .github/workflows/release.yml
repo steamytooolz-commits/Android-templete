@@ -96,15 +96,30 @@ jobs:
           fi
 
       - name: Make Gradlew Executable
-        run: chmod +x ./gradlew || true
+        run: |
+          if [ ! -f ./gradlew ]; then
+            echo "gradlew not found. Generating wrapper with gradle..."
+            gradle wrapper || true
+          fi
+          chmod +x ./gradlew || true
 
       - name: Build Release APK
         if: ${{ github.event_name == 'push' || inputs.build_apk }}
-        run: ./gradlew assembleRelease --stacktrace
+        run: |
+          if [ -f ./gradlew ]; then
+            ./gradlew assembleRelease --stacktrace
+          else
+            gradle assembleRelease --stacktrace
+          fi
 
       - name: Build Release App Bundle (AAB)
         if: ${{ github.event_name == 'push' || inputs.build_aab }}
-        run: ./gradlew bundleRelease --stacktrace
+        run: |
+          if [ -f ./gradlew ]; then
+            ./gradlew bundleRelease --stacktrace
+          else
+            gradle bundleRelease --stacktrace
+          fi
 
       - name: Upload Release APK Artifact
         if: ${{ github.event_name == 'push' || inputs.build_apk }}
