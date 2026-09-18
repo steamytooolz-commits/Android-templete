@@ -1,0 +1,6 @@
+{
+  "name": "Template App",
+  "description": "Production-ready Android template designed for AI agents and developers, featuring full GitHub Actions CI/CD workflows, keystore automation, Robolectric testing, and Compose architecture.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
