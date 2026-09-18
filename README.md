@@ -161,6 +161,8 @@ Add the following 4 secrets:
 | `KEY_ALIAS` | Key alias name | `upload` |
 | `ENV_FILE` *(Optional)* | Contents of production `.env` | `GEMINI_API_KEY=...` |
 
+> ℹ️ **Debug Keystore in CI:** The continuous integration pipeline (`ci.yml`) automatically ensures a standard development `debug.keystore` is present on the runner prior to executing `lintDebug` and `assembleDebug`, guaranteeing clean, self-healing builds in fresh CI/CD environments without manual keystore provisioning.
+
 ---
 
 ## 🤖 AI Agent Customization Playbook
